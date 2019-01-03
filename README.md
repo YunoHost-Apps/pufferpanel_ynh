@@ -21,5 +21,5 @@ PufferPanel Server
  
 ### Upgrade this package:
 
-        $ sudo yunohost app upgrade pufferpanel -u https://github.com/YunoHost-Apps/emby_ynh
+        $ sudo yunohost app upgrade pufferpanel -u https://github.com/YunoHost-Apps/pufferpanel_ynh
 
