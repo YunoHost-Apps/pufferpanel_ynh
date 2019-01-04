@@ -115,6 +115,7 @@ echo "Creating pufferpanel account and installing database..."
 mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" < ..config/install.sql
 mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
 
+echo "Installing user..."
 mysql -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
 INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 
