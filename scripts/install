@@ -169,14 +169,9 @@ ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
 #ynh_replace_string "yunodomain" "$domain" "$final_path/.env"
 
 #==============================================
-# INSTALL PufferPanel
+# INSTALL DAEMON Pufferd
 #==============================================
 
-#Install Panel
-#mv $final_path/
-
-
-#Install Daemon
 mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
 wget https://github.com/YunoHost-Apps/pufferpanel_ynh/releases/download/1.2.5/pufferd_1.2.5_amd64.deb
 dpkg --install pufferd_1.2.5_amd64.deb
