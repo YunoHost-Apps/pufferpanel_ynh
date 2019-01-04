@@ -1,0 +1,9 @@
+{
+    "mysql": {
+        "host": "localhost",
+        "database": "pufferpanel",
+        "username": "pufferpanel",
+        "password": "__DB_PASS__",
+        "port": "3306"
+    }
+}
