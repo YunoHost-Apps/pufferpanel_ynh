@@ -1,0 +1,12 @@
+Description=pufferd daemon service
+[Service]
+Type=simple
+WorkingDirectory=/var/lib/pufferd
+ExecStart=/srv/pufferd/pufferd --run
+ExecStop=/srv/pufferd/pufferd --shutdown $MAINPID
+User=pufferd
+Group=pufferd
+TimeoutStopSec=2m
+SendSIGKILL=no
+[Install]
+WantedBy=multi-user.target

@@ -88,25 +88,10 @@ dpkg --add-architecture i386
 apt-get update
 ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
-# Install Other Dependencies
-#sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
-#dpkg --add-architecture i386
+#apt-key add - https://packagecloud.io/pufferpanel/pufferd/gpgkey
+#echo "deb https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" >> /etc/apt/sources.list.d/pufferpanel_pufferd.list
+#echo "deb-src https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" >> /etc/apt/sources.list.d/pufferpanel_pufferd.list
 #apt-get update
-#apt-get install -y -t stretch-backports 
-#apt-get install -y openssl curl git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-#dpkg --add-architecture i386
-#apt-get update
-#apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-    
- #curl -s https://packagecloud.io/install/repositories/pufferpanel/${pufferdRepo}/script.deb.sh | bash
-
-#Adding repo of pufferd
-#curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferd/script.deb.sh
-
-apt-key add - https://packagecloud.io/pufferpanel/pufferd/gpgkey
-echo "deb https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" > /etc/apt/sources.list.d/pufferpanel_pufferd.list
-echo "deb-src https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" > /etc/apt/sources.list.d/pufferpanel_pufferd.list
-apt-get update
 
 #echo "https://packagecloud.io/install/repositories/pufferpanel/pufferd/config_file.list?os=debian&dist=stretch&source=script" > /etc/apt/sources.list.d/pufferpanel_pufferd.list
 
@@ -129,90 +114,8 @@ ynh_setup_source "$final_path"
 
 #Install Daemon
 mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
-wget https://packagecloud.io/pufferpanel/pufferd/packages/debian/stretch/pufferd_1.2.5_amd64.deb/download.deb
-dpkg --install download.deb
-
-echo -e "Installing pufferd using package manager"
-pufferdLocation="/srv/pufferd"
-installed=0
-if [ $OS_INSTALL_CMD == 'apt' ]; then
-    apt-get update
-    apt-get install pufferd
-    pufferdLocation="/usr/sbin/"
-elif [ $OS_INSTALL_CMD == 'yum' ]; then
-    yum install -y pufferd
-    pufferdLocation="/usr/sbin/"
-fi
-
-if [ -f "${pufferdLocation}/pufferd" ]; then
-    echo "Detected installation via package successful"
-else
-    echo -e "Failed to install using package manager, manually installing"
-    echo -e "Downloading pufferd from $downloadUrl"
-    pufferdLocation="/srv/pufferd/"
-    mkdir -p /srv/pufferd
-    curl -L -o /srv/pufferd/pufferd $downloadUrl
-    checkResponseCode
-    chmod +x /srv/pufferd/pufferd
-    checkResponseCode
-    writeServiceFile
-    checkResponseCode
-    useradd --system --home /var/lib/pufferd --user-group pufferd
-fi
-
-if type systemctl &> /dev/null; then
-    echo "Stopping service to prepare for installation"
-    systemctl stop pufferd
-elif type service &> /dev/null; then
-    echo "Stopping service to prepare for installation"
-    service pufferd stop
-fi
-
-if [ -f "${pufferdLocation}/pufferd" ]; then
-    echo "Detected installation via package successful"
-else
-    echo -e "Failed to install using package manager, manually installing"
-    echo -e "Downloading pufferd from $downloadUrl"
-    pufferdLocation="/srv/pufferd/"
-    mkdir -p /srv/pufferd
-    curl -L -o /srv/pufferd/pufferd $downloadUrl
-    checkResponseCode
-    chmod +x /srv/pufferd/pufferd
-    checkResponseCode
-    writeServiceFile
-    checkResponseCode
-    useradd --system --home /var/lib/pufferd --user-group pufferd
-fi
-
-if type systemctl &> /dev/null; then
-    echo "Stopping service to prepare for installation"
-    systemctl stop pufferd
-elif type service &> /dev/null; then
-    echo "Stopping service to prepare for installation"
-    service pufferd stop
-fi
-
-cd $pufferdLocation
-echo -e "Executing pufferd installation"
-./pufferd --install --auth http://yuno2.probetech.be --token 64F263CF-F18C-4C11-A118-81E2435B2A86 --config /etc/pufferd/config.json
-checkResponseCode
-
-chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd
-if [ -f /srv/pufferd ]; then
-  chown -R pufferd:pufferd /srv/pufferd
-fi
-
-if type systemctl &> /dev/null; then
-    echo "Starting pufferd service"
-    systemctl start pufferd
-    systemctl enable pufferd
-elif type service &> /dev/null; then
-    echo "Starting pufferd service"
-    service pufferd start
-fi
-
-echo "Successfully installed the daemon"
-
+wget https://github.com/YunoHost-Apps/pufferpanel_ynh/releases/download/1.2.5/pufferd_1.2.5_amd64.deb
+dpkg --install pufferd_1.2.5_amd64.deb
 
 #=================================================
 # NGINX CONFIGURATION
@@ -258,8 +161,12 @@ ynh_system_user_create $app
 ### that really need such authorization.
 
 # Set permissions to app files
-#chown -R root: /etc/loolwsd
+useradd --system --home /var/lib/pufferd --user-group pufferd
+chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd /srv/pufferd
 
+echo "Preparing for docker containers if enabled"
+groupadd --force --system docker
+usermod -a -G docker pufferd
 
 #=================================================
 # SETUP SSOWAT
@@ -273,3 +180,5 @@ fi
 
 # Reload services
 systemctl reload nginx
+systemctl start pufferd
+systemctl enable pufferd
