@@ -122,7 +122,7 @@ echo "Creating pufferpanel account and installing database..."
 
 #mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
 #ynh_mysql_connect_as $db_user $db_pwd  <<< "SET GLOBAL event_scheduler = ON;"
-ynh_mysql_execute_as_root <<< "SET GLOBAL event_scheduler = ON;" $db_name
+ynh_mysql_execute_as_root "SET GLOBAL event_scheduler = ON;" $db_name
 
 echo "Installing user..."
 #mysql -D $db_name -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
