@@ -116,15 +116,15 @@ ynh_mysql_setup_db $db_name $db_name
 db_user=$db_name
 
 echo "Creating pufferpanel account and installing database..."
-mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" < ../conf/install.sql
+mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" < ../conf/install.sql
 
 #ynh_mysql_execute_as_root "$(cat ../conf/install.sql)" $db_name
 
-mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
+mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
 #ynh_mysql_connect_as $db_user $db_pwd  <<< "SET GLOBAL event_scheduler = ON;"
 
 echo "Installing user..."
-mysql -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
+mysql -D $db_name -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
 INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 #ynh_mysql_connect_as $db_user $db_pwd $db_name <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 
