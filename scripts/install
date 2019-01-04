@@ -132,7 +132,6 @@ cp -a ../conf/config.json $final_path/config.json
 # MODIFY A CONFIG FILE
 #=================================================
 
-#ynh_replace_string "random_key" "$random_key" "$final_path/.env"
 ynh_replace_string "yunouser"   "$db_name"    "$final_path/config.json"
 ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config.json"
 ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
