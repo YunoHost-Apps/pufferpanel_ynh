@@ -115,8 +115,8 @@ echo "Creating pufferpanel account and installing database..."
 mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" < ..config/install.sql
 mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
 
-#mysql -h localhost -P ${mysqlPort} -D $db_name -u $db_name --password="$db_pwd" -e "
-#INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
+mysql -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
+INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -125,7 +125,6 @@ mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
-
 
 #=================================================
 # SPECIFIC SETUP
