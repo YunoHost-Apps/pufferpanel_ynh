@@ -88,13 +88,16 @@ dpkg --add-architecture i386
 apt-get update
 ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
+#sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
+#dpkg --add-architecture i386
+#apt-get update
+#apt-get install -y -t stretch-backports openjdk-8-jdk-headless
+#ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+
 #apt-key add - https://packagecloud.io/pufferpanel/pufferd/gpgkey
 #echo "deb https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" >> /etc/apt/sources.list.d/pufferpanel_pufferd.list
 #echo "deb-src https://packagecloud.io/pufferpanel/pufferd/debian/ stretch main" >> /etc/apt/sources.list.d/pufferpanel_pufferd.list
 #apt-get update
-
-#echo "https://packagecloud.io/install/repositories/pufferpanel/pufferd/config_file.list?os=debian&dist=stretch&source=script" > /etc/apt/sources.list.d/pufferpanel_pufferd.list
-
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
