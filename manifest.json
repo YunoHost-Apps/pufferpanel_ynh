@@ -54,6 +54,19 @@
                 "default": "true"
             },
             {
+                "name": "email",
+                "type": "email",
+                "ask": {
+                    "en": "Set the administrator email",
+                    "fr": "Définissez l'email administrateur"
+                },
+                "help": {
+                    "en": "Use the help field to add an information for the admin about this question.",
+                    "fr": "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
+                },
+                "example": "Choose a email"
+            },
+            {
                 "name": "password",
                 "type": "password",
                 "ask": {
