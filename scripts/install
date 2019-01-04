@@ -133,6 +133,12 @@ echo "Installing user..."
 #ynh_mysql_connect_as $db_user $db_pwd <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 ynh_mysql_execute_as_root "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'" $db_name
 
+ynh_mysql_execute_as_root "
+INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
+VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" $db_name
+#mysql -h ${mysqlHost} -P ${mysqlPort} -D ${mysqlDb} -u ${mysqlUser} --password="${mysqlPass}" -e "
+#INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
+#VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
