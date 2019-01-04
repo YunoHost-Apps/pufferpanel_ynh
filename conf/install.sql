@@ -1,5 +1,3 @@
-USE `pufferpanel`;
-
 -- Disable Foreign keys to avoid errors in dropping
 SET FOREIGN_KEY_CHECKS = 0;
 
