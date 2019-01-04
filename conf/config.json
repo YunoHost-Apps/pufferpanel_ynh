@@ -1,9 +1,9 @@
 {
     "mysql": {
         "host": "localhost",
-        "database": "pufferpanel",
-        "username": "pufferpanel",
-        "password": "__DB_PASS__",
+        "database": "yunobase",
+        "username": "yunouser",
+        "password": "yunopass",
         "port": "3306"
     }
 }

@@ -100,12 +100,44 @@ ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysq
 #apt-get update
 
 #=================================================
+# CREATE A MYSQL DATABASE
+#=================================================
+# If your app uses a MySQL database, you can use these lines to bootstrap
+# a database, an associated user and save the password in app settings
+
+db_name=$(ynh_sanitize_dbid $app)
+ynh_app_setting_set $app db_name $db_name
+ynh_mysql_setup_db $db_name $db_name
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
+
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+
+# create a user
+email=$(ynh_user_get_info $admin 'mail')
+
+# setup application config
+cp -a ../conf/config.json $final_path/config.json
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+
+#ynh_replace_string "random_key" "$random_key" "$final_path/.env"
+ynh_replace_string "yunouser"   "$db_name"    "$final_path/config.json"
+ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config.json"
+ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
+#ynh_replace_string "yunomail"   "$email"      "$final_path/config.json"
+#ynh_replace_string "yunodomain" "$domain" "$final_path/.env"
 
 #==============================================
 # INSTALL PufferPanel
