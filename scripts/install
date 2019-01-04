@@ -128,7 +128,7 @@ echo "Installing user..."
 #mysql -D $db_name -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
 #INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 #ynh_mysql_connect_as $db_user $db_pwd <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
-ynh_mysql_execute_as_root <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'" $db_name
+ynh_mysql_execute_as_root "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'" $db_name
 
 
 #=================================================
