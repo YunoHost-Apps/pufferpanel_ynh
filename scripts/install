@@ -118,7 +118,8 @@ db_user=$db_name
 echo "Creating pufferpanel account and installing database..."
 #mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" < ../conf/install.sql
 #ynh_mysql_execute_as_root -D $db_name -u $db_user <<< "flush privileges;" ynh_die
-ynh_mysql_execute_as_root "$(cat ../conf/install.sql)" $db_name <<< "flush privileges;"
+ynh_mysql_execute_as_root "$(cat ../conf/install.sql)" $db_name
+systemctl restart mariadb
 
 #mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
 ynh_mysql_connect_as $db_user $db_pwd  <<< "SET GLOBAL event_scheduler = ON;"
