@@ -101,7 +101,7 @@ ynh_package_install openssl curl mysql-client mysql-server php-fpm php-cli php-c
  #curl -s https://packagecloud.io/install/repositories/pufferpanel/${pufferdRepo}/script.deb.sh | bash
 
 #Adding repo of pufferd
-curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferd/script.deb.sh
+#curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferd/script.deb.sh
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
