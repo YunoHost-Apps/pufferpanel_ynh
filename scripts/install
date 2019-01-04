@@ -88,29 +88,19 @@ ynh_app_setting_set $app port $port
 ynh_package_install openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql
 
 # Install Other Dependencies
-echo "Installing some dependencies"
-if [ $OS_INSTALL_CMD == 'apt' ]; then
-    if [ $(lsb_release -sc) == 'jessie' ]; then
-        sudo echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list
-        dpkg --add-architecture i386
-        apt-get update
-        apt-get install -y -t jessie-backports openjdk-8-jdk-headless
-        apt-get install -y openssl curl git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-    elif [ $(lsb_release -sc) == 'trusty' ]; then
-        sudo add-apt-repository -y ppa:openjdk-r/ppa
-        dpkg --add-architecture i386
-        apt-get update
-        apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-    else
-        dpkg --add-architecture i386
-        apt-get update
-        apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-    fi
-    curl -s https://packagecloud.io/install/repositories/pufferpanel/${pufferdRepo}/script.deb.sh | bash
-
+sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
+dpkg --add-architecture i386
+apt-get update
+apt-get install -y -t stretch-backports openjdk-8-jdk-headless
+apt-get install -y openssl curl git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+dpkg --add-architecture i386
+apt-get update
+apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+    
+ #curl -s https://packagecloud.io/install/repositories/pufferpanel/${pufferdRepo}/script.deb.sh | bash
 
 #Adding repo of pufferd
-#curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferd/script.deb.sh
+curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferd/script.deb.sh
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
