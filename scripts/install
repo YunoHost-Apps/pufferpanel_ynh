@@ -113,6 +113,8 @@ db_name=$(ynh_sanitize_dbid $app)
 ynh_app_setting_set $app db_name $db_name
 ynh_mysql_setup_db $db_name $db_name
 
+db_user=$db_name
+
 echo "Creating pufferpanel account and installing database..."
 #mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" < ..config/install.sql
 ynh_mysql_connect_as $db_user $db_pwd $db_name < ..config/install.sql
