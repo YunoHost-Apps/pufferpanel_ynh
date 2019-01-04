@@ -161,7 +161,7 @@ ynh_system_user_create $app
 ### that really need such authorization.
 
 # Set permissions to app files
-useradd --system --home /var/lib/pufferd --user-group pufferd
+#useradd --system --home /var/lib/pufferd --user-group pufferd
 chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd /srv/pufferd
 
 echo "Preparing for docker containers if enabled"
