@@ -84,18 +84,19 @@ ynh_app_setting_set $app port $port
 #==============================================
 # INSTALL DEPS
 #==============================================
-
-ynh_package_install openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql
+dpkg --add-architecture i386
+apt-get update
+ynh_package_install openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
 # Install Other Dependencies
-sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
-dpkg --add-architecture i386
-apt-get update
-apt-get install -y -t stretch-backports openjdk-8-jdk-headless
-apt-get install -y openssl curl git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-dpkg --add-architecture i386
-apt-get update
-apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+#sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
+#dpkg --add-architecture i386
+#apt-get update
+#apt-get install -y -t stretch-backports 
+#apt-get install -y openssl curl git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+#dpkg --add-architecture i386
+#apt-get update
+#apt-get install -y openssl curl git openjdk-8-jdk-headless tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
     
  #curl -s https://packagecloud.io/install/repositories/pufferpanel/${pufferdRepo}/script.deb.sh | bash
 
