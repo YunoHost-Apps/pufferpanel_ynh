@@ -138,7 +138,7 @@ INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_
 VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" $db_name
 #mysql -h ${mysqlHost} -P ${mysqlPort} -D ${mysqlDb} -u ${mysqlUser} --password="${mysqlPass}" -e "
 #INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
-#VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)"
+#VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" 
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -180,6 +180,7 @@ ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
 mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
 wget https://github.com/YunoHost-Apps/pufferpanel_ynh/releases/download/1.2.5/pufferd_1.2.5_amd64.deb
 dpkg --install pufferd_1.2.5_amd64.deb
+pufferd --install --auth https://$domain$path --token ${nodeSecret} --config $final_path/config.json
 
 #=================================================
 # NGINX CONFIGURATION
