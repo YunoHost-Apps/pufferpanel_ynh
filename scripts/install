@@ -111,6 +111,13 @@ db_name=$(ynh_sanitize_dbid $app)
 ynh_app_setting_set $app db_name $db_name
 ynh_mysql_setup_db $db_name $db_name
 
+echo "Creating pufferpanel account and installing database..."
+mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" < ..config/install.sql
+mysql -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
+
+#mysql -h localhost -P ${mysqlPort} -D $db_name -u $db_name --password="$db_pwd" -e "
+#INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
