@@ -122,7 +122,7 @@ ynh_mysql_connect_as $db_user $db_pwd  <<< "SET GLOBAL event_scheduler = ON;"
 echo "Installing user..."
 #mysql -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
 #INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
-ynh_mysql_connect_as $db_user $db_pwd $db_name <<< "INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
+ynh_mysql_connect_as $db_user $db_pwd $db_name <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -137,7 +137,7 @@ ynh_setup_source "$final_path"
 #=================================================
 
 # create a user
-email=$(ynh_user_get_info $admin 'mail')
+#email=$(ynh_user_get_info $admin 'mail')
 
 # setup application config
 cp -a ../conf/config.json $final_path/config.json
