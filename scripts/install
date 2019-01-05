@@ -99,7 +99,7 @@ echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.li
 dpkg --add-architecture i386
 
 ynh_package_update
-ynh_package_install openssl curl mysql-client mysql-server php-openssl php7.2-fpm php7.2-cli php7.2-curl php7.2-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+ynh_package_install openssl curl mysql-client mysql-server php7.2-fpm php7.2-cli php7.2-curl php7.2-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
 #sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
 #dpkg --add-architecture i386
