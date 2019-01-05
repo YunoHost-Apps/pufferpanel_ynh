@@ -146,6 +146,10 @@ VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '$doma
 #INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
 #VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" 
 
+#mysql -h ${mysqlHost} -P ${mysqlPort} -D ${mysqlDb} -u ${mysqlUser} --password="${mysqlPass}" -e "
+#            SELECT setting_val FROM acp_settings WHERE setting_ref='master_url'"
+ynh_mysql_execute_as_root "SELECT setting_val FROM acp_settings WHERE setting_ref='master_url'" $db_name
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
