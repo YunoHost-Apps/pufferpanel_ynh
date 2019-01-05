@@ -155,16 +155,18 @@ ynh_setup_source "$final_path"
 # create a user
 #email=$(ynh_user_get_info $admin 'mail')
 
+mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
+
 # setup application config
-cp -a ../conf/config.json $final_path/config.json
+cp -a ../conf/config.json /etc/pufferd/config.json
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 
-ynh_replace_string "yunouser"   "$db_name"    "$final_path/config.json"
-ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config.json"
-ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
+ynh_replace_string "yunouser"   "$db_name"    "/etc/pufferd/config.json"
+ynh_replace_string "yunopass"   "$db_pwd"     "/etc/pufferd/config.json"
+ynh_replace_string "yunobase"   "$db_name"    "/etc/pufferd/config.json"
 #ynh_replace_string "yunomail"   "$email"      "$final_path/config.json"
 #ynh_replace_string "yunodomain" "$domain" "$final_path/.env"
 
@@ -172,10 +174,9 @@ ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
 # INSTALL DAEMON Pufferd
 #==============================================
 
-mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
 wget https://github.com/YunoHost-Apps/pufferpanel_ynh/releases/download/1.2.5/pufferd_1.2.5_amd64.deb
 dpkg --install pufferd_1.2.5_amd64.deb
-pufferd --install --auth https://$domain$path_url --token ${nodeSecret} --config $final_path/config.json
+pufferd --install --auth https://$domain$path_url --token ${nodeSecret} --config /etc/pufferd/config.json
 
 #=================================================
 # NGINX CONFIGURATION
