@@ -1,6 +1,6 @@
 {
     "name": "PufferPanel",
-    "id": "pufferpannel",
+    "id": "pufferpanel",
     "packaging_format": 1,
     "description": {
         "en": "PufferPanel package for YunoHost.",
