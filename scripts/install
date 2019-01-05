@@ -93,7 +93,7 @@ ynh_app_setting_set $app port $port
 #==============================================
 dpkg --add-architecture i386
 apt-get update
-ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-openssl php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
 #sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
 #dpkg --add-architecture i386
