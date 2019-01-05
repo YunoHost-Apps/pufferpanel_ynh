@@ -91,9 +91,17 @@ ynh_app_setting_set $app port $port
 #==============================================
 # INSTALL DEPS
 #==============================================
+
+## Install the PHP 7.2 repo for debian
+ynh_package_install ca-certificates apt-transport-https
+wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
+
+ynh_package_update
+
 dpkg --add-architecture i386
 apt-get update
-ynh_package_install debian-archive-keyring apt-transport-https openssl curl mysql-client mysql-server php-fpm php-cli php-curl php-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
+ynh_package_install openssl curl mysql-client mysql-server php7.2-openssl php7.2-fpm php7.2-cli php7.2-curl php7.2-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
 
 #sudo echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list
 #dpkg --add-architecture i386
@@ -152,7 +160,7 @@ ynh_setup_source "$final_path"
 # SPECIFIC SETUP
 #=================================================
 
-# create a user
+# create a user 
 #email=$(ynh_user_get_info $admin 'mail')
 
 mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
@@ -215,6 +223,7 @@ ynh_store_file_checksum "/etc/pufferd/config.json"
 
 # Set permissions to app files
 #useradd --system --home /var/lib/pufferd --user-group pufferd
+chown -R $app:$app /srv/pufferpanel/logs
 chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd
 
 echo "Preparing for docker containers if enabled"
