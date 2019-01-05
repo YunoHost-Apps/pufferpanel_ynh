@@ -1,8 +1,6 @@
 # PufferPanel app for YunoHost
 PufferPanel Server
 
-# NOT WORK IS IN DEV
-
 - [Yunohost project](https://yunohost.org)
 - [PufferPanel website](https://www.pufferpanel.com/)
 
