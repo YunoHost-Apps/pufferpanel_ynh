@@ -232,8 +232,7 @@ ynh_store_file_checksum "/etc/pufferd/config.json"
 # Set permissions to app files
 #useradd --system --home /var/lib/pufferd --user-group pufferd
 chown -R www-data:www-data /srv/pufferpanel/logs
-#chown -R 1007:1007 /srv/pufferpanel
-chown -R www-data:www-data /srv/pufferpanel
+chown -R 1007:1007 $final_path
 chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd
 
 echo "Preparing for docker containers if enabled"
