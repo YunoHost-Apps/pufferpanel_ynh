@@ -14,7 +14,15 @@ PufferPanel Server
  1. App can be installed by YunoHost **admin web-interface** or by **running following command**:
 
          $ sudo yunohost app install https://github.com/YunoHost-Apps/pufferpanel_ynh
- 1. Admin username is : **root**.
+         
+### Server Location
+
+1. Server is installed on /var/lib/pufferd/servers/*
+
+Command Exemple :
+
+        $ chmod -R 775 /var/lib/pufferd/servers/40b93af5-c378-4ec5-857e-5ff50b09170d
+        $ chown -R pufferd:pufferd /var/lib/pufferd/servers/40b93af5-c378-4ec5-857e-5ff50b09170d
 
  
 ### Upgrade this package:
