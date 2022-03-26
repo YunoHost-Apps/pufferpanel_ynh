@@ -21,6 +21,10 @@ Web-based Game Server Management System.
 
 
 
+## Screenshots
+
+![](./doc/screenshots/serverlist.png)
+
 ## Disclaimers / important information
 
 - Admin username minimum length is 5
