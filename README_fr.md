@@ -17,6 +17,10 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 
 
+## Captures d'écran
+
+![](./doc/screenshots/serverlist.png)
+
 ## Avertissements / informations importantes
 
 - Admin username minimum length is 5
