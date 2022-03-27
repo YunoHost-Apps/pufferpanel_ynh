@@ -38,9 +38,9 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 ynh_script_progression --message="Validating installation parameters..."
 
-if [[ ${#admin} < 5 ]]; then
-    ynh_die --message="Admin username minimum length is 5"
-fi
+#if [[ ${#admin} < 5 ]]; then
+#    ynh_die --message="Admin username minimum length is 5"
+#fi
 
 # Register (book) web path
 ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url

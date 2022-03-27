@@ -39,7 +39,10 @@
             },
             {
                 "name": "admin",
-                "type": "user"
+                "type": "user",
+                "help": {
+                    "en": "Admin username minimum length is 5.",
+                }
             },
             {
                 "name": "password",
