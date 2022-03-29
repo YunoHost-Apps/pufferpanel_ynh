@@ -14,8 +14,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
-	true
+	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -24,206 +23,133 @@ ynh_abort_if_errors
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-# Retrieve arguments
 domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
+path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
-email=$YNH_APP_ARG_EMAIL
+admin=$YNH_APP_ARG_ADMIN
 password=$YNH_APP_ARG_PASSWORD
-uuid=$(cat /proc/sys/kernel/random/uuid)
-time=$(php -r 'echo time();')
-nodeSecret=$(cat /proc/sys/kernel/random/uuid)
-nodeSecret=${nodeSecret^^}
-#pufferdVersion=$(cat src/versions/pufferd)
-password_user=$(php -r "echo password_hash('${password}', PASSWORD_BCRYPT);");
 
-### If it's a multi-instance app, meaning it can be installed several times independently
-### The id of the app as stated in the manifest is available as $YNH_APP_ID
-### The instance number is available as $YNH_APP_INSTANCE_NUMBER (equals "1", "2", ...)
-### The app instance name is available as $YNH_APP_INSTANCE_NAME
-###    - the first time the app is installed, YNH_APP_INSTANCE_NAME = ynhexample
-###    - the second time the app is installed, YNH_APP_INSTANCE_NAME = ynhexample__2
-###    - ynhexample__{N} for the subsequent installations, with N=3,4, ...
-### The app instance name is probably what interests you most, since this is
-### guaranteed to be unique. This is a good unique identifier to define installation path,
-### db names, ...
+mail=$(ynh_user_get_info --username=$admin --key=mail)
+
 app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
+ynh_script_progression --message="Validating installation parameters..."
 
-### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/srv/$app
-test ! -e "$final_path" || ynh_die "This path already contains a folder"
+#if [[ ${#admin} < 5 ]]; then
+#    ynh_die --message="Admin username minimum length is 5"
+#fi
 
-# Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
+final_path=/var/www/$app
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
-# Check web path availability
-ynh_webpath_available $domain $path_url
 # Register (book) web path
-ynh_webpath_register $app $domain $path_url
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
+ynh_script_progression --message="Storing installation settings..."
 
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app is_public $is_public
-
-#==============================================
-# INSTALL DEPS
-#==============================================
-
-## Install the PHP 7.2 repo for debian
-#ynh_package_install ca-certificates apt-transport-https
-#wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
-#echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
-dpkg --add-architecture i386
-
-ynh_package_update
-#ynh_package_install openssl curl mysql-client mysql-server php7.0-fpm php7.0-cli php7.0-curl php7.0-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-ynh_install_app_dependencies openssl curl mysql-client mysql-server php7.0-fpm php7.0-cli php7.0-curl php7.0-mysql openjdk-8-jdk-headless git tar lib32gcc1 lib32tinfo5 lib32z1 lib32stdc++6 libcurl3-gnutls:i386
-
-## Start php7
-systemctl enable php7.0-fpm
-systemctl start php7.0-fpm
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 
 #=================================================
-# CREATE A MYSQL DATABASE
+# STANDARD MODIFICATIONS
 #=================================================
-# If your app uses a MySQL database, you can use these lines to bootstrap
-# a database, an associated user and save the password in app settings
+# FIND AND OPEN A PORT
+#=================================================
+ynh_script_progression --message="Finding an available port..."
 
-db_name=$(ynh_sanitize_dbid $app)
-ynh_app_setting_set $app db_name $db_name
-ynh_mysql_setup_db $db_name $db_name <<< "flush privileges;"
-
-db_user=$db_name
-
-echo "Creating pufferpanel account and installing database..."
-#mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" < ../conf/install.sql
-#ynh_mysql_execute_as_root -D $db_name <<< "flush privileges;"
-ynh_mysql_execute_file_as_root ../conf/install.sql $db_name
-
-#mysql -D $db_name -h localhost -P 3306 -u $db_name --password="$db_pwd" -e "SET GLOBAL event_scheduler = ON;"
-#ynh_mysql_connect_as $db_user $db_pwd  <<< "SET GLOBAL event_scheduler = ON;"
-ynh_mysql_execute_as_root "SET GLOBAL event_scheduler = ON;" $db_name
-
-echo "Installing user..."
-#mysql -D $db_name -h localhost -P 3306 -D $db_name -u $db_name --password="$db_pwd" -e "
-#INSERT INTO users VALUES (NULL, '${uuid}', '${username}', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
-#ynh_mysql_connect_as $db_user $db_pwd <<< "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'"
-ynh_mysql_execute_as_root "INSERT INTO users VALUES (NULL, '${uuid}', '$db_user', '${email}', '${password_user}', 'en_US', ${time}, NULL, NULL, 1, 0, 1, 0, NULL) ON DUPLICATE KEY UPDATE password='${password}'" $db_name
-
-ynh_mysql_execute_as_root "
-INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
-VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '$domain$path_url', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" $db_name
-#mysql -h ${mysqlHost} -P ${mysqlPort} -D ${mysqlDb} -u ${mysqlUser} --password="${mysqlPass}" -e "
-#INSERT INTO nodes (name, location, fqdn, ip, daemon_secret,daemon_listen,daemon_sftp, allocate_memory, allocate_disk, ips, ports, public, docker)
-#VALUES('LocalNode', (SELECT id FROM locations WHERE short = 'Localhost'), '${siteUrl}', '127.0.0.1', '${nodeSecret}', 5656, 5657, 0, 0, '{}', '{}', 1, 0)" 
-
-ynh_mysql_execute_as_root "INSERT INTO acp_settings (setting_ref, setting_val) VALUES ('master_url', 'https://$domain$path_url') ON DUPLICATE KEY UPDATE setting_val = VALUES(setting_val)" $db_name
-
-#mysql -h ${mysqlHost} -P ${mysqlPort} -D ${mysqlDb} -u ${mysqlUser} --password="${mysqlPass}" -e "
-#            SELECT setting_val FROM acp_settings WHERE setting_ref='master_url'"
-ynh_mysql_execute_as_root "SELECT setting_val FROM acp_settings WHERE setting_ref='master_url'" $db_name
+# Find an available port
+port=$(ynh_find_port --port=8095)
+ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
+# INSTALL DEPENDENCIES
 #=================================================
+ynh_script_progression --message="Installing dependencies..."
 
-ynh_app_setting_set $app final_path $final_path
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path"
+ynh_install_app_dependencies $pkg_dependencies
+ynh_install_extra_app_dependencies --repo="deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main" --package="pufferpanel" --key="https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
 
-#=================================================
-# SPECIFIC SETUP
-#=================================================
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
-# create a user 
-#email=$(ynh_user_get_info $admin 'mail')
-
-mkdir -p /var/lib/pufferd /var/log/pufferd /etc/pufferd
-
-# setup application config
-cp -a ../conf/config.json $final_path/config.json
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-
-ynh_replace_string "yunouser"   "$db_name"    "$final_path/config.json"
-ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config.json"
-ynh_replace_string "yunobase"   "$db_name"    "$final_path/config.json"
-
-#==============================================
-# INSTALL DAEMON Pufferd
-#==============================================
-
-wget https://github.com/YunoHost-Apps/pufferpanel_ynh/releases/download/1.2.5/pufferd_1.2.5_amd64.deb
-dpkg --install pufferd_1.2.5_amd64.deb
-pufferd --install --auth https://$domain$path_url --token ${nodeSecret} --config /etc/pufferd/config.json
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Configuring NGINX web server..."
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
-# CREATE DEDICATED USER
+# SPECIFIC SETUP
 #=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..."
 
-# Create a system user
-ynh_system_user_create $app
+ynh_add_config --template="../conf/config.json" --destination="/etc/$app/config.json"
+
+chmod 400 "/etc/$app/config.json"
+chown $app:$app "/etc/$app/config.json"
+
+pufferpanel user add --admin --email $mail --name $admin --password $password
 
 #=================================================
-# STORE THE CONFIG FILE CHECKSUM
+# SETUP SYSTEMD
 #=================================================
+ynh_script_progression --message="Configuring a systemd service..."
 
-### `ynh_store_file_checksum` is used to store the checksum of a file.
-### That way, during the upgrade script, by using `ynh_backup_if_checksum_is_different`,
-### you can make a backup of this file before modifying it again if the admin had modified it.
-
-# Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum "$final_path/config.json"
+# Create a dedicated systemd config
+systemctl enable $app.service --quiet
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-# SECURE FILES AND DIRECTORIES
+# INTEGRATE SERVICE IN YUNOHOST
 #=================================================
+ynh_script_progression --message="Integrating service in YunoHost..."
 
-### For security reason, any app should set the permissions to root: before anything else.
-### Then, if write authorization is needed, any access should be given only to directories
-### that really need such authorization.
+yunohost service add $app
 
-# Set permissions to app files
-#useradd --system --home /var/lib/pufferd --user-group pufferd
-chown -R www-data:www-data /srv/pufferpanel/logs
-chown -R 1007:1007 $final_path
-chown -R pufferd:pufferd /var/lib/pufferd /etc/pufferd /var/log/pufferd
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..."
 
-echo "Preparing for docker containers if enabled"
-groupadd --force --system docker
-usermod -a -G docker pufferd
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="Listening for"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Configuring permissions..."
 
-# If app is public, add url to SSOWat conf as skipped_uris
-if [ $is_public -eq 1 ]; then
-  # unprotected_uris allows SSO credentials to be passed anyway.
-  ynh_app_setting_set "$app" unprotected_uris "/"
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
-# Reload services
-systemctl reload nginx
-systemctl start pufferd
-systemctl enable pufferd
+#=================================================
+# RELOAD NGINX
+#=================================================
+ynh_script_progression --message="Reloading NGINX web server..."
+
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Installation of $app completed"
