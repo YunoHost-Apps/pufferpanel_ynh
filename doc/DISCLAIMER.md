@@ -1,1 +1,1 @@
-- Admin username minimum length is 5
+- Admin username minimum length is five characters.
