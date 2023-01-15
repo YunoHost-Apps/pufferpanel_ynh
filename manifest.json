@@ -25,8 +25,7 @@
     },
     "multi_instance": false,
     "services": [
-        "nginx",
-        "mysql"
+        "nginx"
     ],
     "arguments": {
         "install": [
@@ -43,7 +42,8 @@
                 "name": "admin",
                 "type": "user",
                 "help": {
-                    "en": "Admin username minimum length is 5."
+                    "en": "Admin username minimum length is five characters.",
+                    "fr": "La longueur minimale du nom d'utilisateur de l'administrateur est de cinq caractères."
                 }
             },
             {
