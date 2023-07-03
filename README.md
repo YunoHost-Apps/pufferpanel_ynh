@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # PufferPanel for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Working status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Working status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+
 [![Install PufferPanel with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -23,9 +24,6 @@ PufferPanel is an open source game server management panel designed to be easy t
 
 ![Screenshot of PufferPanel](./doc/screenshots/serverlist.png)
 
-## Disclaimers / important information
-
-- Admin username minimum length is five characters.
 ## Documentation and resources
 
 * Official app website: <https://www.pufferpanel.com/>
