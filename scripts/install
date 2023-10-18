@@ -40,7 +40,7 @@ ynh_script_progression --message="Configuring NGINX web server..."
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
-ynh_add_systemd_config
+systemctl enable $app.service --quiet
 
 yunohost service add $app --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
 
