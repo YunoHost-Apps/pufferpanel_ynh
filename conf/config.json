@@ -1,9 +1,9 @@
 {
-  "logs": "/var/log/pufferpanel",
+  "logs": "/var/log/__APP__",
   "panel": {
     "database": {
       "dialect": "sqlite3",
-      "url": "file:/var/lib/pufferpanel/database.db?cache=shared"
+      "url": "file:/var/lib/__APP__/database.db?cache=shared"
     },
     "web": {
       "files": "__INSTALL_DIR__"
@@ -11,8 +11,8 @@
   },
   "daemon": {
     "data": {
-      "cache": "/var/lib/pufferpanel/cache",
-      "servers": "/var/lib/pufferpanel/servers"
+      "cache": "/var/lib/__APP__/cache",
+      "servers": "/var/lib/__APP__/servers"
     }
   },
   "web": {
