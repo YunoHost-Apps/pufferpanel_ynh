@@ -42,7 +42,7 @@ ram.runtime = "50M"
     type = "password"
 
 [resources]
-    [resources.system_user]
+    #[resources.system_user]
 
     [resources.install_dir]
 
