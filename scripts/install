@@ -27,9 +27,6 @@ fi
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-#REMOVEME? ynh_script_progression --message="Installing dependencies..."
-
-#REMOVEME? ynh_app_setting_set --app=$app --key=install_dir --value=$install_dir
 
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
