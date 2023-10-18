@@ -6,7 +6,7 @@
       "url": "file:/var/lib/pufferpanel/database.db?cache=shared"
     },
     "web": {
-      "files": "/var/www/pufferpanel"
+      "files": "__INSTALL_DIR__"
     }
   },
   "daemon": {
