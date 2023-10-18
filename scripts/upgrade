@@ -93,7 +93,7 @@ ynh_script_progression --message="Updating a configuration file..."
 
 ynh_add_config --template="../conf/config.json" --destination="/etc/$app/config.json"
 
-chmod 400 "/etc/$app/config.json"
+chmod 650 "/etc/$app/config.json"
 chown $app:$app "/etc/$app/config.json"
 
 #=================================================
