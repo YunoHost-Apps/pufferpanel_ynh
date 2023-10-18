@@ -29,7 +29,6 @@ PufferPanel is an open source game server management panel designed to be easy t
 * Site officiel de l’app : <https://www.pufferpanel.com/>
 * Documentation officielle de l’admin : <https://docs.pufferpanel.com/en/latest/>
 * Dépôt de code officiel de l’app : <https://github.com/PufferPanel/PufferPanel>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_pufferpanel>
 * Signaler un bug : <https://github.com/YunoHost-Apps/pufferpanel_ynh/issues>
 
 ## Informations pour les développeurs
