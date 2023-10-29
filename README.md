@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # PufferPanel for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Working status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+
 [![Install PufferPanel with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -15,36 +16,31 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-Web-based Game Server Management System.
+PufferPanel is an open source game server management panel designed to be easy to use and easy to install. PufferPanel supports Minecraft, Forge, Spigot, Sponge, Source Dedicated Servers, BungeeCord, PocketMine, Forge, and much more.
 
-**Shipped version:** 2.4.0~ynh1
-
-
+**Shipped version:** 2.6.9~ynh1
 
 ## Screenshots
 
-![](./doc/screenshots/serverlist.png)
+![Screenshot of PufferPanel](./doc/screenshots/serverlist.png)
 
-## Disclaimers / important information
-
-- Admin username minimum length is 5
 ## Documentation and resources
 
-* Official app website: https://www.pufferpanel.com/
-* Official admin documentation: https://docs.pufferpanel.com/en/latest/
-* Upstream app code repository: https://github.com/PufferPanel/PufferPanel
-* YunoHost documentation for this app: https://yunohost.org/app_pufferpanel
-* Report a bug: https://github.com/YunoHost-Apps/pufferpanel_ynh/issues
+* Official app website: <https://www.pufferpanel.com/>
+* Official admin documentation: <https://docs.pufferpanel.com/en/latest/>
+* Upstream app code repository: <https://github.com/PufferPanel/PufferPanel>
+* Report a bug: <https://github.com/YunoHost-Apps/pufferpanel_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/pufferpanel_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/pufferpanel_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade pufferpanel -u https://github.com/YunoHost-Apps/pufferpanel_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>
