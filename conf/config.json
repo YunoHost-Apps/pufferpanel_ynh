@@ -17,5 +17,16 @@
   },
   "web": {
   "host": "127.0.0.1:__PORT__"
+  },
+  "panel": {
+    "email": {
+      "provider": "smtp",
+      "from": "pufferpanel@__DOMAIN__",
+      "host": "localhost",
+      "username": "__APP__",
+      "password": "__MAIL_PWD__",
+      "provider": "",
+      "key": ""
+    }
   }
 }
