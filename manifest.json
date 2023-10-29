@@ -17,11 +17,11 @@
     },
     "license": "Apache-2.0",
     "maintainer": {
-        "name": "liberodark",
-        "email": "liberodark@gmail.com"
+        "name": "",
+        "email": ""
     },
     "requirements": {
-        "yunohost": ">= 11.0.9"
+        "yunohost": ">= 11.2"
     },
     "multi_instance": false,
     "services": [
