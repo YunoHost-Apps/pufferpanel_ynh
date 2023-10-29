@@ -54,9 +54,12 @@ ram.runtime = "50M"
     main.auth_header = false
 
     [resources.apt]
-    packages = "sqlite3"
+    packages = "postgresql"
 
     extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
     extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
     extras.pufferpanel.packages = "pufferpanel"
+
+    [resources.database]
+    type = "postgresql"
    

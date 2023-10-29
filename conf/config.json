@@ -2,8 +2,8 @@
   "logs": "/var/log/__APP__",
   "panel": {
     "database": {
-      "dialect": "sqlite3",
-      "url": "file:/var/lib/__APP__/database.db?cache=shared"
+      "dialect": "postgresql",
+      "url": "user=__DB_USER__ password=__DB_PWD__ dbname=__DB_NAME__ port=9920 sslmode=disable"
     },
     "web": {
       "files": "__INSTALL_DIR__"
