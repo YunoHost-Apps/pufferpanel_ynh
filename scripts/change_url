@@ -32,7 +32,7 @@ ynh_change_url_nginx_config
 #=================================================
 ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template="../conf/config.json" --destination="/etc/$app/config.json"
+ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
 
 chmod 650 "/etc/$app/config.json"
 chown $app:$app "/etc/$app/config.json"
