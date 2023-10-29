@@ -16,9 +16,9 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-PufferPanel is an open source game server management panel designed to be easy to use and easy to install. PufferPanel supports Minecraft, Forge, Spigot, Sponge, Source Dedicated Servers, BungeeCord, PocketMine, Forge, and much more.
+PufferPanel est un panneau de gestion de serveur de jeu open source conçu pour être facile à utiliser et à installer. PufferPanel prend en charge Minecraft, Forge, Spigot, Sponge, Source Dedicated Servers, BungeeCord, PocketMine, Forge et bien plus encore.
 
-**Version incluse :** 2.4.0~ynh1
+**Version incluse :** 2.6.9~ynh1
 
 ## Captures d’écran
 
