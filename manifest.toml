@@ -5,7 +5,7 @@ name = "PufferPanel"
 description.en = "Web-based Game Server Management System"
 description.fr = "Système de gestion de serveur de jeu"
 
-version = "2.6.9~ynh1"
+version = "2.6.9~ynh2"
 
 maintainers = [""]
 
