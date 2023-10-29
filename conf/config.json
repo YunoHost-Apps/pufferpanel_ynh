@@ -21,7 +21,7 @@
   "panel": {
     "email": {
       "provider": "smtp",
-      "from": "pufferpanel@__DOMAIN__",
+      "from": "pufferpanel@__MAIN_DOMAIN__",
       "host": "localhost",
       "username": "__APP__",
       "password": "__MAIL_PWD__",
