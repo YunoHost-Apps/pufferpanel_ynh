@@ -18,6 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 PufferPanel is a web-based Game Server Management System created by players for players. PufferPanel allows you to run multiple different game servers all from one central location, and give other users their own servers, or access to your own servers.
 
+
 **Shipped version:** 2.6.9~ynh2
 
 ## Screenshots
