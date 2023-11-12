@@ -18,7 +18,6 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 PufferPanel est un système de gestion de serveur de jeu basé sur le Web créé par des joueurs pour des joueurs. PufferPanel vous permet d'exécuter plusieurs serveurs de jeu différents à partir d'un emplacement central et de donner aux autres utilisateurs leurs propres serveurs ou un accès à vos propres serveurs.
 
-
 **Version incluse :** 2.6.9~ynh2
 
 ## Captures d’écran
