@@ -56,7 +56,7 @@ ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
 chmod 650 "/etc/$app/config.json"
 chown $app:$app "/etc/$app/config.json"
 
-pufferpanel user add --admin --email=$mail --name=$admin --password=$password
+pufferpanel user add --admin --email=$email --name=$admin --password=$password
 
 #=================================================
 # GENERIC FINALIZATION
