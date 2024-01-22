@@ -3,7 +3,7 @@
   "panel": {
     "database": {
       "dialect": "postgresql",
-      "url": "user=__DB_USER__ password=__DB_PWD__ dbname=__DB_NAME__ port=9920 sslmode=disable"
+      "url": "user=__DB_USER__ password=__DB_PWD__ dbname=__DB_NAME__ port=5432 sslmode=disable"
     },
     "web": {
       "files": "__INSTALL_DIR__"
