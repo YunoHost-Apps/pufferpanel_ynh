@@ -31,6 +31,18 @@ ynh_script_progression --message="Stopping a systemd service..."
 ynh_systemd_action --service_name="$app" --action="stop" --log_path="systemd"
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..."
+
+# moving the data folder to the standard ynh one
+if [ -d "/var/lib/$app" ]; then
+    ynh_print_info --message="Moving the data folder from '/var/lib/$app' to '$data_dir'"
+    mv "/var/lib/$app" "$data_dir"
+    ynh_secure_remove "/var/lib/$app"
+fi
+
+#=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 
