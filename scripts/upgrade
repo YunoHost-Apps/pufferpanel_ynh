@@ -13,7 +13,7 @@ source /usr/share/yunohost/helpers
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-email=$(ynh_user_get_info --username=$admin --key=mail)
+email=$(ynh_user_get_info --username="$admin" --key=mail)
 
 #=================================================
 # CHECK VERSION
@@ -28,7 +28,7 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..."
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
+ynh_systemd_action --service_name="$app" --action="stop" --log_path="systemd"
 
 #=================================================
 # UPGRADE DEPENDENCIES
@@ -36,7 +36,7 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
 
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
@@ -46,9 +46,9 @@ ynh_script_progression --message="Upgrading system configurations related to $ap
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
-systemctl enable $app.service --quiet
+systemctl enable "$app.service" --quiet
 
-yunohost service add $app --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
 
 #=================================================
 # UPDATE A CONFIG FILE
@@ -58,14 +58,14 @@ ynh_script_progression --message="Updating a configuration file..."
 ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
 
 chmod 650 "/etc/$app/config.json"
-chown $app:$app "/etc/$app/config.json"
+chown "$app:$app" "/etc/$app/config.json"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..."
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="Listening for"
+ynh_systemd_action --service_name="$app" --action="start" --log_path="systemd" --line_match="Listening for"
 
 #=================================================
 # END OF SCRIPT
