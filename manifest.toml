@@ -7,7 +7,7 @@ description.fr = "Système de gestion de serveur de jeu"
 
 version = "2.6.9~ynh2"
 
-maintainers = [""]
+maintainers = [ "" ]
 
 
 [upstream]
@@ -29,43 +29,43 @@ ram.runtime = "50M"
 
 
 [install]
-[install.domain]
-type = "domain"
+    [install.domain]
+    type = "domain"
 
-[install.init_main_permission]
-type = "group"
-default = "visitors"
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
 
-[install.admin]
-help.en = "Admin username minimum length is five characters."
-help.fr = "La longueur minimale du nom d'utilisateur de l'administrateur est de cinq caractères."
-type = "user"
+    [install.admin]
+    help.en = "Admin username minimum length is five characters."
+    help.fr = "La longueur minimale du nom d'utilisateur de l'administrateur est de cinq caractères."
+    type = "user"
 
-[install.password]
-type = "password"
+    [install.password]
+    type = "password"
 
 
 [resources]
-[resources.system_user]
-allow_email = true
+    [resources.system_user]
+    allow_email = true
 
-[resources.install_dir]
+    [resources.install_dir]
 
-[resources.data_dir]
-subdirs = ["binaries", "cache", "servers"]
+    [resources.data_dir]
+    subdirs = [ "binaries", "cache", "servers" ]
 
-[resources.ports]
+    [resources.ports]
 
-[resources.permissions]
-main.url = "/"
-main.auth_header = false
+    [resources.permissions]
+    main.url = "/"
+    main.auth_header = false
 
-[resources.apt]
-packages = "postgresql"
+    [resources.apt]
+    packages = "postgresql"
 
-extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
-extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
-extras.pufferpanel.packages = "pufferpanel"
+    extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
+    extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
+    extras.pufferpanel.packages = "pufferpanel"
 
-[resources.database]
-type = "postgresql"
+    [resources.database]
+    type = "postgresql"
