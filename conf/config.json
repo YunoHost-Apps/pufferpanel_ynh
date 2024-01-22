@@ -2,20 +2,28 @@
   "logs": "/var/log/__APP__",
   "panel": {
     "database": {
-      "dialect": "sqlite3",
-      "url": "file:/var/lib/__APP__/database.db?cache=shared"
+      "dialect": "postgresql",
+      "url": "user=__DB_USER__ password=__DB_PWD__ dbname=__DB_NAME__ port=5432 sslmode=disable"
     },
     "web": {
       "files": "__INSTALL_DIR__"
+    },
+    "email": {
+      "provider": "smtp",
+      "from": "__EMAIL__",
+      "host": "localhost",
+      "username": "__APP__",
+      "password": "__MAIL_PWD__"
     }
   },
   "daemon": {
     "data": {
-      "cache": "/var/lib/__APP__/cache",
-      "servers": "/var/lib/__APP__/servers"
+      "binaries": "__DATA_DIR__/binaries",
+      "cache": "__DATA_DIR__/cache",
+      "servers": "__DATA_DIR__/servers"
     }
   },
   "web": {
-  "host": "127.0.0.1:__PORT__"
+    "host": "127.0.0.1:__PORT__"
   }
 }

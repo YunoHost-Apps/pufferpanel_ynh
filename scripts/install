@@ -13,14 +13,14 @@ source /usr/share/yunohost/helpers
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-mail=$(ynh_user_get_info --username=$admin --key=mail)
+email=$(ynh_user_get_info --username="$admin" --key=mail)
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
 ynh_script_progression --message="Validating installation parameters..."
 
-if [[ $admin < 5 ]]; then
+if [[ ${#admin} -lt 5 ]]; then
     ynh_die --message="Admin username minimum length is 5"
 fi
 
@@ -30,7 +30,7 @@ fi
 
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -40,9 +40,9 @@ ynh_script_progression --message="Configuring NGINX web server..."
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
-systemctl enable $app.service --quiet
+systemctl enable "$app.service" --quiet
 
-yunohost service add $app --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
 
 #=================================================
 # SPECIFIC SETUP
@@ -54,9 +54,9 @@ ynh_script_progression --message="Adding a configuration file..."
 ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
 
 chmod 650 "/etc/$app/config.json"
-chown $app:$app "/etc/$app/config.json"
+chown "$app:$app" "/etc/$app/config.json"
 
-pufferpanel user add --admin --email=$mail --name=$admin --password=$password
+pufferpanel user add --admin --email="$email" --name="$admin" --password="$password"
 
 #=================================================
 # GENERIC FINALIZATION
@@ -66,7 +66,7 @@ pufferpanel user add --admin --email=$mail --name=$admin --password=$password
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="Listening for"
+ynh_systemd_action --service_name="$app" --action="start" --log_path="systemd" --line_match="Listening for"
 
 #=================================================
 # END OF SCRIPT
