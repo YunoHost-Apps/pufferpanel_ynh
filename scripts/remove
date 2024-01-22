@@ -25,6 +25,8 @@ fi
 # Remove the dedicated NGINX config
 ynh_remove_nginx_config
 
+ynh_secure_remove "/etc/$app/"
+
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
