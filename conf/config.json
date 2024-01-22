@@ -11,12 +11,12 @@
   },
   "daemon": {
     "data": {
-      "cache": "/var/lib/__APP__/cache",
-      "servers": "/var/lib/__APP__/servers"
+      "cache": "__DATA_DIR__/cache",
+      "servers": "__DATA_DIR__/servers"
     }
   },
   "web": {
-  "host": "127.0.0.1:__PORT__"
+    "host": "127.0.0.1:__PORT__"
   },
   "panel": {
     "email": {

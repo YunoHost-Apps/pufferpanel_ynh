@@ -9,11 +9,13 @@ version = "2.6.9~ynh2"
 
 maintainers = [""]
 
+
 [upstream]
 license = "Apache-2.0"
 website = "https://www.pufferpanel.com/"
 admindoc = "https://docs.pufferpanel.com/en/latest/"
 code = "https://github.com/PufferPanel/PufferPanel"
+
 
 [integration]
 yunohost = ">= 11.2"
@@ -25,41 +27,45 @@ disk = "50M"
 ram.build = "350M"
 ram.runtime = "50M"
 
+
 [install]
-    [install.domain]
-    type = "domain"
+[install.domain]
+type = "domain"
 
-    [install.init_main_permission]
-    type = "group"
-    default = "visitors"
+[install.init_main_permission]
+type = "group"
+default = "visitors"
 
-    [install.admin]
-    help.en = "Admin username minimum length is five characters."
-    help.fr = "La longueur minimale du nom d'utilisateur de l'administrateur est de cinq caractères."
-    type = "user"
+[install.admin]
+help.en = "Admin username minimum length is five characters."
+help.fr = "La longueur minimale du nom d'utilisateur de l'administrateur est de cinq caractères."
+type = "user"
 
-    [install.password]
-    type = "password"
+[install.password]
+type = "password"
+
 
 [resources]
-    [resources.system_user]
-    allow_email = true
+[resources.system_user]
+allow_email = true
 
-    [resources.install_dir]
+[resources.install_dir]
 
-    [resources.ports]
+[resources.data_dir]
+subdirs = ["binaries", "cache", "servers"]
 
-    [resources.permissions]
-    main.url = "/"
-    main.auth_header = false
+[resources.ports]
 
-    [resources.apt]
-    packages = "postgresql"
+[resources.permissions]
+main.url = "/"
+main.auth_header = false
 
-    extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
-    extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
-    extras.pufferpanel.packages = "pufferpanel"
+[resources.apt]
+packages = "postgresql"
 
-    [resources.database]
-    type = "postgresql"
-   
+extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
+extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
+extras.pufferpanel.packages = "pufferpanel"
+
+[resources.database]
+type = "postgresql"
