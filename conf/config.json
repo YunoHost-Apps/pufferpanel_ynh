@@ -13,8 +13,7 @@
       "from": "__EMAIL__",
       "host": "localhost",
       "username": "__APP__",
-      "password": "__MAIL_PWD__",
-      "key": ""
+      "password": "__MAIL_PWD__"
     }
   },
   "daemon": {
