@@ -9,7 +9,7 @@ description.fr = "Système de gestion de serveur de jeu"
 
 version = "2.6.9~ynh2"
 
-maintainers = [ "" ]
+maintainers = []
 
 
 [upstream]
