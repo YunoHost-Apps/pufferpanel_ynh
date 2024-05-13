@@ -18,7 +18,6 @@ NON debe editarse manualmente.
 
 PufferPanel is a web-based Game Server Management System created by players for players. PufferPanel allows you to run multiple different game servers all from one central location, and give other users their own servers, or access to your own servers.
 
-
 **Versión proporcionada:** 2.6.9~ynh2
 
 ## Capturas de pantalla
