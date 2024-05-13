@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 PufferPanel
+# YunoHost 上的 PufferPanel
 
 [![集成程度](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![工作状态](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
 
