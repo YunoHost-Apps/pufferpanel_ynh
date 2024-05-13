@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "pufferpanel"
@@ -7,13 +9,15 @@ description.fr = "Système de gestion de serveur de jeu"
 
 version = "2.6.9~ynh2"
 
-maintainers = [""]
+maintainers = []
+
 
 [upstream]
 license = "Apache-2.0"
 website = "https://www.pufferpanel.com/"
 admindoc = "https://docs.pufferpanel.com/en/latest/"
 code = "https://github.com/PufferPanel/PufferPanel"
+
 
 [integration]
 yunohost = ">= 11.2"
@@ -24,6 +28,7 @@ sso = false
 disk = "50M"
 ram.build = "350M"
 ram.runtime = "50M"
+
 
 [install]
     [install.domain]
@@ -41,10 +46,15 @@ ram.runtime = "50M"
     [install.password]
     type = "password"
 
+
 [resources]
     [resources.system_user]
+    allow_email = true
 
     [resources.install_dir]
+
+    [resources.data_dir]
+    subdirs = [ "binaries", "cache", "servers" ]
 
     [resources.ports]
 
@@ -53,9 +63,11 @@ ram.runtime = "50M"
     main.auth_header = false
 
     [resources.apt]
-    packages = "sqlite3"
+    packages = "postgresql"
 
     extras.pufferpanel.repo = "deb https://packagecloud.io/pufferpanel/pufferpanel/debian/ buster main"
     extras.pufferpanel.key = "https://packagecloud.io/pufferpanel/pufferpanel/gpgkey"
     extras.pufferpanel.packages = "pufferpanel"
-   
+
+    [resources.database]
+    type = "postgresql"

@@ -16,7 +16,8 @@ Il NE doit PAS être modifié à la main.
 
 ## Vue d’ensemble
 
-PufferPanel est un panneau de gestion de serveur de jeu open source conçu pour être facile à utiliser et à installer. PufferPanel prend en charge Minecraft, Forge, Spigot, Sponge, Source Dedicated Servers, BungeeCord, PocketMine, Forge et bien plus encore.
+PufferPanel est un système de gestion de serveur de jeu basé sur le Web créé par des joueurs pour des joueurs. PufferPanel vous permet d'exécuter plusieurs serveurs de jeu différents à partir d'un emplacement central et de donner aux autres utilisateurs leurs propres serveurs ou un accès à vos propres serveurs.
+
 
 **Version incluse :** 2.6.9~ynh2
 
