@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -18,27 +12,26 @@ email=$(ynh_user_get_info --username="$admin" --key=mail)
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..."
+ynh_script_progression "Validating installation parameters..."
 
 if [[ ${#admin} -lt 5 ]]; then
-    ynh_die --message="Admin username minimum length is 5"
+    ynh_die "Admin username minimum length is 5"
 fi
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
 
-chmod 750 "$install_dir"
-chmod -R o-rwx "$install_dir"
-chown -R "$app:www-data" "$install_dir"
-
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 750 "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..."
+ynh_script_progression "Configuring NGINX web server..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 systemctl enable "$app.service" --quiet
 
@@ -49,27 +42,25 @@ yunohost service add "$app" --description="Web-based Game Server Management Syst
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression "Adding $app's configuration..."
 
-ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
+ynh_config_add --template="config.json" --destination="/etc/$app/config.json"
 
-chmod 650 "/etc/$app/config.json"
-chown "$app:$app" "/etc/$app/config.json"
+#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 650 "/etc/$app/config.json"
+#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "/etc/$app/config.json"
 
 pufferpanel user add --admin --email="$email" --name="$admin" --password="$password"
 
 #=================================================
-# GENERIC FINALIZATION
-#=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
+ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
-ynh_systemd_action --service_name="$app" --action="start" --log_path="systemd" --line_match="Listening for"
+ynh_systemctl --service="$app" --action="start" --log_path="systemd" --wait_until="Listening for"
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed"
+ynh_script_progression "Installation of $app completed"
