@@ -28,18 +28,10 @@ if [ -d "/var/lib/$app" ]; then
 fi
 
 #=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 750 "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
-#=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
 systemctl enable "$app.service" --quiet
@@ -53,8 +45,7 @@ ynh_script_progression "Updating configuration..."
 
 ynh_config_add --template="config.json" --destination="/etc/$app/config.json"
 
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 650 "/etc/$app/config.json"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "/etc/$app/config.json"
+chmod 650 "/etc/$app/config.json"
 
 #=================================================
 # START SYSTEMD SERVICE

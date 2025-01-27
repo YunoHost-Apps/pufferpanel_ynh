@@ -19,18 +19,10 @@ if [[ ${#admin} -lt 5 ]]; then
 fi
 
 #=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 750 "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
-#=================================================
 # NGINX CONFIGURATION
 #=================================================
 ynh_script_progression "Configuring NGINX web server..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
 systemctl enable "$app.service" --quiet
@@ -46,8 +38,7 @@ ynh_script_progression "Adding $app's configuration..."
 
 ynh_config_add --template="config.json" --destination="/etc/$app/config.json"
 
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 650 "/etc/$app/config.json"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "/etc/$app/config.json"
+chmod 650 "/etc/$app/config.json"
 
 pufferpanel user add --admin --email="$email" --name="$admin" --password="$password"
 
@@ -56,7 +47,6 @@ pufferpanel user add --admin --email="$email" --name="$admin" --password="$passw
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-# Start a systemd service
 ynh_systemctl --service="$app" --action="start" --log_path="systemd" --wait_until="Listening for"
 
 #=================================================
