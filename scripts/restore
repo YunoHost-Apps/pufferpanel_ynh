@@ -11,18 +11,18 @@ ynh_script_progression "Restoring the app main directory..."
 ynh_restore "$install_dir"
 
 #=================================================
-# RESTORE THE POSTGRESQL DATABASE
-#=================================================
-ynh_script_progression "Restoring the PostgreSQL database..."
-
-ynh_psql_db_shell < ./db.sql
-
-#=================================================
 # RESTORE THE DATA DIRECTORY
 #=================================================
 ynh_script_progression "Restoring the data directory..."
 
 ynh_restore "$data_dir"
+
+#=================================================
+# RESTORE THE POSTGRESQL DATABASE
+#=================================================
+ynh_script_progression "Restoring the PostgreSQL database..."
+
+ynh_psql_db_shell < ./db.sql
 
 #=================================================
 # RESTORE VARIOUS FILES
@@ -33,6 +33,7 @@ ynh_restore "/etc/$app/"
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
+ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
 
 yunohost service add "$app" --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
