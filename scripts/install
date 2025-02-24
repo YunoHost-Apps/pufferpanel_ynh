@@ -30,8 +30,6 @@ systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Web-based Game Server Management System" --log="/var/log/$app/$app.log"
 
 #=================================================
-# SPECIFIC SETUP
-#=================================================
 # ADD A CONFIGURATION
 #=================================================
 ynh_script_progression "Adding $app's configuration..."
