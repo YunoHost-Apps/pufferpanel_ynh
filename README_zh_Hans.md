@@ -5,7 +5,9 @@
 
 # YunoHost 上的 PufferPanel
 
-[![集成程度](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![工作状态](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+[![集成程度](https://apps.yunohost.org/badge/integration/pufferpanel)](https://ci-apps.yunohost.org/ci/apps/pufferpanel/)
+![工作状态](https://apps.yunohost.org/badge/state/pufferpanel)
+![维护状态](https://apps.yunohost.org/badge/maintained/pufferpanel)
 
 [![使用 YunoHost 安装 PufferPanel](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 

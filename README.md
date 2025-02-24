@@ -5,7 +5,9 @@ It shall NOT be edited by hand.
 
 # PufferPanel for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Working status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+[![Integration level](https://apps.yunohost.org/badge/integration/pufferpanel)](https://ci-apps.yunohost.org/ci/apps/pufferpanel/)
+![Working status](https://apps.yunohost.org/badge/state/pufferpanel)
+![Maintenance status](https://apps.yunohost.org/badge/maintained/pufferpanel)
 
 [![Install PufferPanel with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 
