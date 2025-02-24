@@ -6,4 +6,5 @@ test_format = 1.0
     # Tests to run
     # ------------
     
-    arg.password = "password1234"
+    args.password = "password1234"
+    
