@@ -46,7 +46,6 @@ ram.runtime = "50M"
     [install.password]
     type = "password"
 
-
 [resources]
     [resources.system_user]
     allow_email = true
