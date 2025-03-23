@@ -64,12 +64,12 @@ yunohost service add "$app" --description="Web-based Game Server Management Syst
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Updating a configuration file..."
+#ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
+#ynh_add_config --template="config.json" --destination="/etc/$app/config.json"
 
-chmod 650 "/etc/$app/config.json"
-chown "$app:$app" "/etc/$app/config.json"
+#chmod 650 "/etc/$app/config.json"
+#chown "$app:$app" "/etc/$app/config.json"
 
 #=================================================
 # START SYSTEMD SERVICE
