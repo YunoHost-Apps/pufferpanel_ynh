@@ -18,9 +18,9 @@
   },
   "daemon": {
     "data": {
-      "binaries": "__DATA_DIR__/binaries",
       "cache": "__DATA_DIR__/cache",
-      "servers": "__DATA_DIR__/servers"
+      "servers": "__DATA_DIR__/servers",
+      "binaries": "__DATA_DIR__/binaries"
     }
   },
   "web": {
