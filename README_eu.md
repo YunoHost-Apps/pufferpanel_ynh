@@ -5,7 +5,9 @@ EZ editatu eskuz.
 
 # PufferPanel YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+[![Integrazio maila](https://apps.yunohost.org/badge/integration/pufferpanel)](https://ci-apps.yunohost.org/ci/apps/pufferpanel/)
+![Funtzionamendu egoera](https://apps.yunohost.org/badge/state/pufferpanel)
+![Mantentze egoera](https://apps.yunohost.org/badge/maintained/pufferpanel)
 
 [![Instalatu PufferPanel YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 

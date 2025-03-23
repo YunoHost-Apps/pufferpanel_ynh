@@ -5,7 +5,9 @@ No se debe editar a mano.
 
 # PufferPanel para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/pufferpanel)](https://ci-apps.yunohost.org/ci/apps/pufferpanel/)
+![Estado funcional](https://apps.yunohost.org/badge/state/pufferpanel)
+![Estado En Mantención](https://apps.yunohost.org/badge/maintained/pufferpanel)
 
 [![Instalar PufferPanel con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 
@@ -35,7 +37,7 @@ PufferPanel is a web-based Game Server Management System created by players for 
 
 ## Información para desarrolladores
 
-Por favor enviar sus correcciones a la [`branch testing`](https://github.com/YunoHost-Apps/pufferpanel_ynh/tree/testing
+Por favor enviar sus correcciones a la [rama `testing`](https://github.com/YunoHost-Apps/pufferpanel_ynh/tree/testing).
 
 Para probar la rama `testing`, sigue asÍ:
 

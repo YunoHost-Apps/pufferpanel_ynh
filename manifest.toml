@@ -11,13 +11,11 @@ version = "2.6.9~ynh2"
 
 maintainers = []
 
-
 [upstream]
 license = "Apache-2.0"
 website = "https://www.pufferpanel.com/"
 admindoc = "https://docs.pufferpanel.com/en/latest/"
 code = "https://github.com/PufferPanel/PufferPanel"
-
 
 [integration]
 yunohost = ">= 11.2"
@@ -28,7 +26,6 @@ sso = false
 disk = "50M"
 ram.build = "350M"
 ram.runtime = "50M"
-
 
 [install]
     [install.domain]
