@@ -7,10 +7,9 @@ name = "PufferPanel"
 description.en = "Web-based Game Server Management System"
 description.fr = "Système de gestion de serveur de jeu"
 
-version = "2.6.9~ynh2"
+version = "2.7.1~ynh1"
 
 maintainers = []
-
 
 [upstream]
 license = "Apache-2.0"
@@ -18,17 +17,18 @@ website = "https://www.pufferpanel.com/"
 admindoc = "https://docs.pufferpanel.com/en/latest/"
 code = "https://github.com/PufferPanel/PufferPanel"
 
-
 [integration]
 yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
+
 ldap = false
+
 sso = false
+
 disk = "50M"
 ram.build = "350M"
 ram.runtime = "50M"
-
 
 [install]
     [install.domain]
@@ -48,6 +48,7 @@ ram.runtime = "50M"
 
 
 [resources]
+
     [resources.system_user]
     allow_email = true
 
@@ -56,11 +57,11 @@ ram.runtime = "50M"
     [resources.data_dir]
     subdirs = [ "binaries", "cache", "servers" ]
 
-    [resources.ports]
-
     [resources.permissions]
     main.url = "/"
     main.auth_header = false
+
+    [resources.ports]
 
     [resources.apt]
     packages = "postgresql"
