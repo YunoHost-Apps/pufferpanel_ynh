@@ -5,7 +5,9 @@ Il NE doit PAS être modifié à la main.
 
 # PufferPanel pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/pufferpanel.svg)](https://dash.yunohost.org/appci/app/pufferpanel) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/pufferpanel.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/pufferpanel.maintain.svg)
+[![Niveau d’intégration](https://apps.yunohost.org/badge/integration/pufferpanel)](https://ci-apps.yunohost.org/ci/apps/pufferpanel/)
+![Statut du fonctionnement](https://apps.yunohost.org/badge/state/pufferpanel)
+![Statut de maintenance](https://apps.yunohost.org/badge/maintained/pufferpanel)
 
 [![Installer PufferPanel avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pufferpanel)
 
@@ -19,7 +21,7 @@ Il NE doit PAS être modifié à la main.
 PufferPanel est un système de gestion de serveur de jeu basé sur le Web créé par des joueurs pour des joueurs. PufferPanel vous permet d'exécuter plusieurs serveurs de jeu différents à partir d'un emplacement central et de donner aux autres utilisateurs leurs propres serveurs ou un accès à vos propres serveurs.
 
 
-**Version incluse :** 2.6.9~ynh2
+**Version incluse :** 2.7.1~ynh1
 
 ## Captures d’écran
 
