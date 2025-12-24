@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -8,13 +7,14 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 email=$(ynh_user_get_info --username="$admin" --key=mail)
+main_domain=$(cat /etc/yunohost/current_host)
 
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Stopping $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="stop" --log_path="systemd"
+ynh_systemctl --service="$app" --action="stop"
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
@@ -52,7 +52,7 @@ chmod 650 "/etc/$app/config.json"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start" --log_path="systemd" --wait_until="Listening for"
+ynh_systemctl --service="$app" --action="start" #--wait_until="Listening for"
 
 #=================================================
 # END OF SCRIPT
