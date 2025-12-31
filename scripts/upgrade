@@ -44,7 +44,6 @@ yunohost service add "$app" --description="Web-based Game Server Management Syst
 ynh_script_progression "Updating configuration..."
 
 ynh_config_add --template="config.json" --destination="/etc/$app/config.json"
-
 chmod 650 "/etc/$app/config.json"
 
 #=================================================
@@ -52,7 +51,7 @@ chmod 650 "/etc/$app/config.json"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start" #--wait_until="Listening for"
+ynh_systemctl --service="$app" --action="start"
 
 #=================================================
 # END OF SCRIPT

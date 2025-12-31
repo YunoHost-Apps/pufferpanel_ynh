@@ -45,7 +45,7 @@ pufferpanel user add --admin --email="$email" --name="$admin" --password="$passw
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start" #--wait_until="Listening for"
+ynh_systemctl --service="$app" --action="start"
 
 #=================================================
 # END OF SCRIPT
