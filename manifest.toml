@@ -18,12 +18,12 @@ admindoc = "https://docs.pufferpanel.com/en/latest/"
 code = "https://github.com/PufferPanel/PufferPanel"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 12.1.38"
+helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
 
 ldap = false
-
 sso = false
 
 disk = "50M"
@@ -45,7 +45,6 @@ ram.runtime = "50M"
 
     [install.password]
     type = "password"
-
 
 [resources]
 
