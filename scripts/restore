@@ -29,6 +29,7 @@ ynh_psql_db_shell < ./db.sql
 ynh_script_progression "Restoring various files..."
 
 ynh_restore "/etc/$app/"
+ynh_restore "/var/log/$app/"
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 

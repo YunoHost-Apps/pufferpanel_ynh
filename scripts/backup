@@ -24,6 +24,9 @@ ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 ynh_backup "/etc/$app/"
 
+# NB: /var/log is not backuped during safety-backup-before-upgrades, same as $data_dir
+ynh_backup "/var/log/$app/"
+
 #=================================================
 # BACKUP THE POSTGRESQL DATABASE
 #=================================================
